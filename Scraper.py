@@ -1,6 +1,7 @@
 #! /usr/bin/python
 
-# Web Scraper for Pastebin. Just executes that he downloads the last posts and save in text mode on your PC.
+# Web Scraper for Pastebin.
+# Just executes that he downloads the last posts and save in text mode on your PC.
 # Author: w00f
 
 import requests
@@ -11,15 +12,20 @@ import platform
 
 try:
     while True:
-        file = open('AccessedSites.txt')
-        accessed_sites = file.read()
+        if not os.path.exists('AccessedSites.txt'):
+            file = open('AccessedSites.txt', 'w')
+            file.write('Accessed links\n\n')
+            accessed_sites = file.read()
+        else:
+            file = open('AccessedSites.txt')
+            accessed_sites = file.read()
 
         pastebin_latest = requests.get('http://pastebin.com/archive')
         pastebin_soup = BeautifulSoup(pastebin_latest.text, 'html.parser')
         table = pastebin_soup.find('table')
         links = []
 
-        for link in table.find_all('a'): 
+        for link in table.find_all('a'):
             if link.get('href') not in accessed_sites and 'archive' not in link.get('href'):
                 print('[+] Novo link ', link.get('href'))
                 links.append((link.get('href')))
