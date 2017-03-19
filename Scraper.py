@@ -27,7 +27,7 @@ try:
 
         for link in table.find_all('a'):
             if link.get('href') not in accessed_sites and 'archive' not in link.get('href'):
-                print('[+] Novo link ', link.get('href'))
+                print('[+] New link ', link.get('href'))
                 links.append((link.get('href')))
 
         file.close()
