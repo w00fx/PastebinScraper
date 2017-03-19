@@ -9,12 +9,6 @@ import os
 import time
 import platform
 
-import requests
-from bs4 import BeautifulSoup
-import os
-import time
-import platform
-
 try:
     while True:
         file = open('AccessedSites.txt')
