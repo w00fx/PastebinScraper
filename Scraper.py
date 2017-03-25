@@ -43,7 +43,7 @@ def get_links(soup):
     links = []
     for link in table.find_all('a'):
         if link.get('href') not in accessed_sites and not re.search(
-                r'\b[a-zA-Z0-9]{8}\b', link.get('href'), re.IGNORECASE) == None:
+                r'\b[a-zA-Z0-9]{8}\b', link.get('href'), re.IGNORECASE) == None and len(link.get('href')) == 9:
             print('[+] New link ', link.get('href'))
             links.append((link.get('href')))
     return links
